@@ -1,6 +1,6 @@
 # dispensasi-ukt
 Project Tugas Akhir Kuliah Sistem Informasi UPJ - Arya wijaya
 
-Language : PHP
-Framework : Laravel 10
-Database : MySQL
+Language : PHP </br>
+Framework : Laravel 10 </br>
+Database : MySQL </br>
