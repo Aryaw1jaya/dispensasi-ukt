@@ -10,6 +10,13 @@
                             <form action="{{ route('register.custom') }}" method="POST">
                                 @csrf
                                 <div class="form-group mb-3">
+                                    <input type="text" placeholder="NIM" id="NIM" class="form-control"
+                                        name="student_id" required autofocus>
+                                    @if ($errors->has('student_id'))
+                                        <span class="text-danger">{{ $errors->first('student_id') }}</span>
+                                    @endif
+                                </div>
+                                <div class="form-group mb-3">
                                     <input type="text" placeholder="Name" id="name" class="form-control"
                                         name="name" required autofocus>
                                     @if ($errors->has('name'))

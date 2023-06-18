@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('dashboard', [LoginController::class, 'dashboard']);
+Route::get('/', [LoginController::class, 'dashboard']);
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('custom-login', [LoginController::class, 'customLogin'])->name('login.custom');
 Route::get('registration', [LoginController::class, 'registration'])->name('register-user');

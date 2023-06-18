@@ -25,8 +25,7 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('app')
-                ->withSuccess('Signed in');
+            return redirect('/');
         }
 
         return redirect("login")->withSuccess('Login details are not valid');
@@ -40,6 +39,7 @@ class LoginController extends Controller
     public function customRegistration(Request $request)
     {
         $request->validate([
+            'student_id' => 'required|unique:users',
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
@@ -48,12 +48,13 @@ class LoginController extends Controller
         $data = $request->all();
         $check = $this->create($data);
 
-        return redirect("app")->withSuccess('You have signed-in');
+        return redirect("/")->withSuccess('You have signed-in');
     }
 
     public function create(array $data)
     {
         return User::create([
+            'student_id' => $data['student_id'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
@@ -63,7 +64,15 @@ class LoginController extends Controller
     public function dashboard()
     {
         if (Auth::check()) {
-            return view('app');
+            if (Auth::user()->role == 'admin') {
+                return view('pages.admin.dashboard');
+            } elseif (Auth::user()->role == 'student') {
+                return view('pages.student.dashboard');
+            } elseif (Auth::user()->role == 'rectorate') {
+                return view('pages.rectorate.dashboard');
+            } elseif (Auth::user()->role == 'moderator') {
+                return view('pages.moderator.dashboard');
+            }
         }
 
         return redirect("login")->withSuccess('You are not allowed to access');
