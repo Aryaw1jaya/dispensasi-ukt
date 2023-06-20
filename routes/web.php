@@ -33,3 +33,10 @@ Route::get('signout', [LoginController::class, 'signOut'])->name('signout');
 
 // admin
 Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('admin/create', [AdminController::class, 'create'])->name('admin.create');
+Route::post('admin/store', [AdminController::class, 'store'])->name('admin.store');
+Route::get('admin/edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
+Route::post('admin/update', [AdminController::class, 'update'])->name('admin.update');
+Route::get('admin/delete/{id}', [AdminController::class, 'delete'])->name('admin.delete');
+Route::get('admin/edit-password/{id}', [AdminController::class, 'editPassword'])->name('admin.edit-password');
+Route::post('admin/update-password', [AdminController::class, 'updatePassword'])->name('admin.update-password');

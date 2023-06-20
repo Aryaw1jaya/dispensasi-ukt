@@ -2,7 +2,7 @@
 @section('content')
     <div class="pt-4 mx-5">
         <h1>Welcome {{ session('name') }}, anda login sebagai Admin.</h1>
-
+        <a href="{{ route('admin.create') }}" class="btn btn-primary">Tambah User</a>
         <table class="table table-striped mt-4" style="border: 1px black">
             <tr>
                 <th>No</th>
@@ -24,9 +24,12 @@
                     <td>{{ $user->created_at }}</td>
                     <td>{{ $user->updated_at }}</td>
                     <td>
-                        <a href="#" class="btn btn-warning">Edit</a>
-                        <a href="#">
-                            <button class="btn btn-danger"
+                        <a href="{{ route('admin.edit', $user->id) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ route('admin.edit-password', $user->id) }}" class="btn btn-warning">
+                            Reset Password
+                        </a>
+                        <a href="{{ route('admin.delete', $user->id) }}">
+                            <button type="submit" class="btn btn-danger"
                                 onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                                 Delete
                             </button>

@@ -39,8 +39,14 @@ class LoginController extends Controller
 
             if ($role == 'admin') {
                 return redirect()->intended('admin/dashboard');
-            } else {
-                return redirect()->intended('dashboard')->withSuccess('Signed in');
+            }
+            // else if ($role == 'moderator') {
+            //     return redirect()->intended('moderator/dashboard');
+            // } else if ($role == 'rectorate') {
+            //     return redirect()->intended('rectorate/dashboard');
+            // } 
+            else {
+                return redirect()->intended('dashboard');
             }
         } else {
             return redirect("login")->withSuccess('Login details are not valid');
