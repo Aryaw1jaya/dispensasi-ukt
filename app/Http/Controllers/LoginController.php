@@ -36,6 +36,8 @@ class LoginController extends Controller
             $request->session()->put('email', $email);
 
             return redirect('dashboard')->withSuccess('Signed in');
+        } else {
+            return redirect("login")->withSuccess('Login details are not valid');
         }
     }
 

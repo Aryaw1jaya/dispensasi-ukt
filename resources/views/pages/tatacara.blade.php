@@ -4,7 +4,7 @@
         <!-- Start Step Registrasi -->
         <div class="container mb-5 d-flex flex-column justify-content-center">
             <h3 class="fw-bolder text-center mt-4">Tata Cara Pengajuan Dispensasi</h3>
-            <hr class="mb-4 w-75 mx-auto" />
+            <hr class="w-75 mx-auto">
 
             <div class="card w-75 mx-auto mb-3 shadow">
                 <div class="row g-2">

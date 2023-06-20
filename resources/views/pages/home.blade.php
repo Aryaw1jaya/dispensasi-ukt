@@ -62,7 +62,7 @@
             </label>
             <div class="row row-gap-2 mt-2">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                    <div class="card">
+                    <div class="card rounded-5 px-2">
                         <div class="card-body">
                             <h5 class="card-title">Special title treatment</h5>
                             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="card">
+                    <div class="card rounded-5 px-2">
                         <div class="card-body">
                             <h5 class="card-title">Special title treatment</h5>
                             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                    <div class="card">
+                    <div class="card rounded-5 px-2">
                         <div class="card-body">
                             <h5 class="card-title">Special title treatment</h5>
                             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="card">
+                    <div class="card rounded-5 px-2">
                         <div class="card-body">
                             <h5 class="card-title">Special title treatment</h5>
                             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>

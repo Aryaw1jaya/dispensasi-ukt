@@ -11,7 +11,7 @@
 
 <body style="background-color: rgb(233, 233, 233)">
     @include('layouts.navbar')
-    <div class="container-fluid pt-2 mb-5">
+    <div class="container-fluid pt-2 mb-5" style="height: auto; min-height:77.5vh">
         @yield('content')
     </div>
     @include('layouts.footer')
