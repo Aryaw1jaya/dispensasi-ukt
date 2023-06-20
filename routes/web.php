@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LoginController;
@@ -29,3 +30,6 @@ Route::get('registration', [LoginController::class, 'registration'])->name('regi
 Route::post('custom-registration', [LoginController::class, 'customRegistration'])->name('register.custom');
 
 Route::get('signout', [LoginController::class, 'signOut'])->name('signout');
+
+// admin
+Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
