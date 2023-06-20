@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function login()
     {
         return view('auth.login');
     }
@@ -25,10 +26,17 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect('/');
-        }
+            $users = DB::table('users')->where('email', $request->email)->first();
+            $name = $users->name;
+            $email = $users->email;
 
-        return redirect("login")->withSuccess('Login details are not valid');
+            Session::start();
+
+            $request->session()->put('name', $name);
+            $request->session()->put('email', $email);
+
+            return redirect('dashboard')->withSuccess('Signed in');
+        }
     }
 
     public function registration()
@@ -64,18 +72,10 @@ class LoginController extends Controller
     public function dashboard()
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 'admin') {
-                return view('pages.admin.dashboard');
-            } elseif (Auth::user()->role == 'student') {
-                return view('pages.student.dashboard');
-            } elseif (Auth::user()->role == 'rectorate') {
-                return view('pages.rectorate.dashboard');
-            } elseif (Auth::user()->role == 'moderator') {
-                return view('pages.moderator.dashboard');
-            }
+            return view('pages.dashboard');
         }
 
-        return redirect("login")->withSuccess('You are not allowed to access');
+        return redirect("login")->withSuccess("You are not allowed to access");
     }
 
     public function signOut()
