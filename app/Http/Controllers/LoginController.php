@@ -29,13 +29,25 @@ class LoginController extends Controller
             $users = DB::table('users')->where('email', $request->email)->first();
             $name = $users->name;
             $email = $users->email;
+            $role = $users->role;
 
             Session::start();
 
             $request->session()->put('name', $name);
             $request->session()->put('email', $email);
+            $request->session()->put('role', $role);
 
-            return redirect('dashboard')->withSuccess('Signed in');
+            if ($role == 'admin') {
+                return redirect()->intended('admin/dashboard');
+            }
+            // else if ($role == 'moderator') {
+            //     return redirect()->intended('moderator/dashboard');
+            // } else if ($role == 'rectorate') {
+            //     return redirect()->intended('rectorate/dashboard');
+            // } 
+            else {
+                return redirect()->intended('dashboard');
+            }
         } else {
             return redirect("login")->withSuccess('Login details are not valid');
         }

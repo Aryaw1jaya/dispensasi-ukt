@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LoginController;
@@ -29,3 +30,20 @@ Route::get('registration', [LoginController::class, 'registration'])->name('regi
 Route::post('custom-registration', [LoginController::class, 'customRegistration'])->name('register.custom');
 
 Route::get('signout', [LoginController::class, 'signOut'])->name('signout');
+
+Route::group(['middleware' => function ($request, $next) {
+    if (session('role') !== 'admin') {
+        abort(403, 'Kamu gak berhak kesini :)');
+    }
+    return $next($request);
+}], function () {
+    // admin
+    Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('admin/create', [AdminController::class, 'create'])->name('admin.create');
+    Route::post('admin/store', [AdminController::class, 'store'])->name('admin.store');
+    Route::get('admin/edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
+    Route::post('admin/update', [AdminController::class, 'update'])->name('admin.update');
+    Route::get('admin/delete/{id}', [AdminController::class, 'delete'])->name('admin.delete');
+    Route::get('admin/edit-password/{id}', [AdminController::class, 'editPassword'])->name('admin.edit-password');
+    Route::post('admin/update-password', [AdminController::class, 'updatePassword'])->name('admin.update-password');
+});
