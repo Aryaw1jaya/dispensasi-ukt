@@ -27,12 +27,15 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $users = DB::table('users')->where('email', $request->email)->first();
+            $id = $users->id;
+            $student_id = $users->student_id;
             $name = $users->name;
             $email = $users->email;
             $role = $users->role;
 
             Session::start();
-
+            $request->session()->put('id', $id);
+            $request->session()->put('student_id', $student_id);
             $request->session()->put('name', $name);
             $request->session()->put('email', $email);
             $request->session()->put('role', $role);
@@ -46,7 +49,7 @@ class LoginController extends Controller
             //     return redirect()->intended('rectorate/dashboard');
             // } 
             else {
-                return redirect()->intended('dashboard');
+                return redirect()->intended('student/dashboard');
             }
         } else {
             return redirect("login")->withSuccess('Login details are not valid');

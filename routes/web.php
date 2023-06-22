@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +47,17 @@ Route::group(['middleware' => function ($request, $next) {
     Route::get('admin/delete/{id}', [AdminController::class, 'delete'])->name('admin.delete');
     Route::get('admin/edit-password/{id}', [AdminController::class, 'editPassword'])->name('admin.edit-password');
     Route::post('admin/update-password', [AdminController::class, 'updatePassword'])->name('admin.update-password');
+});
+
+Route::group(['middleware' => function ($request, $next) {
+    if (session('role') !== 'student') {
+        abort(403, 'Kamu gak berhak kesini :)');
+    }
+    return $next($request);
+}], function () {
+    // student
+    Route::get('student/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
+    Route::get('student/pengajuan', [StudentController::class, 'pengajuan'])->name('student.pengajuan');
+    Route::get('student/create-pengajuan', [StudentController::class, 'createPengajuan'])->name('student.create-pengajuan');
+    Route::post('student/store-pengajuan', [StudentController::class, 'storePengajuan'])->name('student.store-pengajuan');
 });
