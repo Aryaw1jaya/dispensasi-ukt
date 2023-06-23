@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ModeratorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,3 +62,20 @@ Route::group(['middleware' => function ($request, $next) {
     Route::get('student/create-pengajuan', [StudentController::class, 'createPengajuan'])->name('student.create-pengajuan');
     Route::post('student/store-pengajuan', [StudentController::class, 'storePengajuan'])->name('student.store-pengajuan');
 });
+
+// Route::group(['middleware' => function ($request, $next) {
+//     if (session('role') !== 'moderator') {
+//         abort(403, 'Kamu gak berhak kesini :)');
+//     }
+//     return $next($request);
+// }], function () {
+//     // moderator
+//     Route::get('moderator/dashboard', [ModeratorController::class, 'index'])->name('moderator.dashboard');
+//     Route::get('moderator/pengajuan', [ModeratorController::class, 'pengajuan'])->name('moderator.pengajuan');
+//     Route::get('moderator/terima/{id}', [ModeratorController::class, 'terima'])->name('moderator.terima');
+//     Route::get('moderator/tolak/{id}', [ModeratorController::class, 'tolak'])->name('moderator.tolak');
+// });
+
+Route::get('moderator/dashboard', [ModeratorController::class, 'index'])->name('moderator.dashboard');
+Route::get('moderator/pengajuan/', [ModeratorController::class, 'pengajuan'])->name('moderator.pengajuan');
+Route::post('/moderator/update-status/{id}', [ModeratorController::class, 'updateStatus'])->name('moderator.update-status');
