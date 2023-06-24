@@ -61,17 +61,52 @@
                     </td>
                     <td>{{ $item->status }}</td>
                     <td>
-                        <form action="{{ route('moderator.update-status', $item->id) }}" method="post">
-                            @csrf
-                            <select name="status" id="">
-                                <option value="diterima">diterima</option>
-                                <option value="ditolak">ditolak</option>
-                            </select>
-                            <textarea name="note" id="" cols="30" rows="3"></textarea>
-                            <button class="btn btn-info" type="submit">Submit</button>
-                        </form>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop{{ $item->id }}">
+                            Action
+                        </button>
+                    </td>
                 </tr>
             @endforeach
         </table>
+
+        @foreach ($pengajuan as $item)
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop{{ $item->id }}" data-bs-backdrop="static"
+                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Action Modal</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('moderator.update-status', $item->id) }}" method="post">
+                                @csrf
+                                <div class="form-floating">
+                                    <select name="status" id="status" class="form-select"
+                                        aria-label="Default select example">
+                                        <option value="diterima">diterima</option>
+                                        <option value="ditolak">ditolak</option>
+                                    </select>
+                                    <label for="status">Status</label>
+                                </div>
+                                <br>
+                                <div class="form-floating">
+                                    <textarea class="form-control" name="note" placeholder="berikan notes ke pengaju" id="floatingTextarea"
+                                        rows="3" required></textarea>
+                                    <label for="floatingTextarea">Notes</label>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 @endsection
