@@ -44,11 +44,9 @@ class LoginController extends Controller
                 return redirect()->intended('admin/dashboard');
             } else if ($role == 'moderator') {
                 return redirect()->intended('moderator/dashboard');
-            }
-            // else if ($role == 'rectorate') {
-            // //     return redirect()->intended('rectorate/dashboard');
-            // // } 
-            else {
+            } else if ($role == 'rectorate') {
+                return redirect()->intended('rectorate/dashboard');
+            } else {
                 return redirect()->intended('student/dashboard');
             }
         } else {

@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\RektoratController;
 use App\Http\Controllers\ModeratorController;
 
 /*
@@ -79,3 +80,7 @@ Route::group(['middleware' => function ($request, $next) {
 Route::get('moderator/dashboard', [ModeratorController::class, 'index'])->name('moderator.dashboard');
 Route::get('moderator/pengajuan/', [ModeratorController::class, 'pengajuan'])->name('moderator.pengajuan');
 Route::post('/moderator/update-status/{id}', [ModeratorController::class, 'updateStatus'])->name('moderator.update-status');
+
+Route::get('rectorate/dashboard', [RektoratController::class, 'index'])->name('rectorate.dashboard');
+Route::get('rectorate/pengajuan/', [RektoratController::class, 'pengajuan'])->name('rectorate.pengajuan');
+Route::post('/rectorate/update-status/{id}', [RektoratController::class, 'updateStatus'])->name('rectorate.update-status');
